@@ -24,6 +24,4 @@ async function calcTotalCandles(maxDayNumber=8, candleFunction=howManyCandles) {
 	return sum;
 }
 
-calcTotalCandles().then((sum) => {
-	console.log(sum);
-});
+(async () => {console.log(await calcTotalCandles())})();
