@@ -1,28 +1,29 @@
-function howManyCandles(dayNumber, callback) {
+async function howManyCandles(dayNumber) {
 	if (dayNumber < 1) {
-		return callback("The day must be higher or equal to 1");
+		throw "The day must be higher or equal to 1";
 	}
 
 	if (dayNumber > 8) {
-		return callback("There is no Isru chag for hanuka");
+		throw "There is no Isru chag for hanuka";
 	}
 
-	callback(null, (dayNumber + 1));
+	return dayNumber + 1
 }
 
-function calcTotalCandles(maxDayNumber=8, candleFunction=howManyCandles, callback) {
+async function calcTotalCandles(maxDayNumber=8, candleFunction=howManyCandles) {
 	let sum = 0;
+	let candleJobs = []
 	for (let i = 1; i <= maxDayNumber; i ++) {
-		candleFunction(i, (err, candleCount) => {
-			sum += candleCount;
-
-			if (i == maxDayNumber) {
-				callback(null, sum);
-			}
-		})
+		candleJobs.push(candleFunction(i));
 	}
+
+	for (let i = 0; i < maxDayNumber; i ++) {
+		sum += await candleJobs[i];
+	}
+	
+	return sum;
 }
 
-calcTotalCandles(8, howManyCandles, (err, sum) => {
+calcTotalCandles().then((sum) => {
 	console.log(sum);
 });
