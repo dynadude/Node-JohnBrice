@@ -1,10 +1,14 @@
 import fs from 'fs';
+import { promisify } from 'util';
 
-fs.readFile('test.txt', null, (err, data) => {
-	if (err) {
-		console.log(`Error: ${err}`);
-		return;
+const readPromisify = promisify(fs.readFile);
+
+async function main() {
+	try {
+		console.log((await readPromisify('test.txt', null)).toString());
+	} catch (err) {
+		console.error(err);
 	}
+}
 
-	console.log(data.toString());
-})
+main();
