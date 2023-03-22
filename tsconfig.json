@@ -104,7 +104,8 @@
 
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
+    "watch": true
   },
 
   "watchOptions": {
@@ -118,6 +119,6 @@
       "synchronousWatchDirectory": true,
       // Finally, two additional settings for reducing the amount of possible
       // files to track  work from these directories
-      "excludeDirectories": ["**/node_modules", "_build"],
+      "excludeDirectories": ["**/node_modules"]
     }
 }

@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const sagi = (dayNumber) => __awaiter(void 0, void 0, void 0, function* () {
+const howManyCandles = (dayNumber) => __awaiter(void 0, void 0, void 0, function* () {
     if (dayNumber < 1) {
         throw "The day must be higher or equal to 1";
     }
@@ -17,15 +17,20 @@ const sagi = (dayNumber) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return dayNumber + 1;
 });
-const totalCandles = (maxDayNumber = 8, candleFunction = sagi) => __awaiter(void 0, void 0, void 0, function* () {
+const totalCandles = (maxDayNumber = 8, candleFunction = howManyCandles) => __awaiter(void 0, void 0, void 0, function* () {
     let sum = 0;
-    let candleJobs = [];
+    let candlePromises = [];
+    // create the Promises
     for (let i = 1; i <= maxDayNumber; i++) {
-        candleJobs.push(candleFunction(i));
+        candlePromises.push(candleFunction(i));
     }
+    // get the outputs of the Promises
     for (let i = 0; i < maxDayNumber; i++) {
-        sum += yield candleJobs[i];
+        sum += yield candlePromises[i];
     }
     return sum;
 });
-(() => __awaiter(void 0, void 0, void 0, function* () { console.log(yield totalCandles()); }))();
+function main() {
+    (() => __awaiter(this, void 0, void 0, function* () { console.log(yield totalCandles()); }))();
+}
+main();

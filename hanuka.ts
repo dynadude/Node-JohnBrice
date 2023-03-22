@@ -1,4 +1,4 @@
-const sagi = async (dayNumber: number): Promise<number> => {
+const howManyCandles = async (dayNumber: number): Promise<number> => {
 	if (dayNumber < 1) {
 		throw "The day must be higher or equal to 1";
 	}
@@ -10,18 +10,25 @@ const sagi = async (dayNumber: number): Promise<number> => {
 	return dayNumber + 1
 }
 
-const totalCandles = async (maxDayNumber=8, candleFunction=sagi) => {
+const totalCandles = async (maxDayNumber = 8, candleFunction = howManyCandles) => {
 	let sum = 0;
-	let candleJobs: Array<Promise<number>> = [];
-	for (let i = 1; i <= maxDayNumber; i ++) {
-		candleJobs.push(candleFunction(i));
+	let candlePromises: Array<Promise<number>> = [];
+
+	// create the Promises
+	for (let i = 1; i <= maxDayNumber; i++) {
+		candlePromises.push(candleFunction(i));
 	}
 
-	for (let i = 0; i < maxDayNumber; i ++) {
-		sum += await candleJobs[i];
+	// get the outputs of the Promises
+	for (let i = 0; i < maxDayNumber; i++) {
+		sum += await candlePromises[i];
 	}
-	
+
 	return sum;
 }
 
-(async () => {console.log(await totalCandles())})();
+function main() {
+	(async () => { console.log(await totalCandles()) })();
+}
+
+main();
