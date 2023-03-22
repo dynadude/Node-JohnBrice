@@ -1,2 +1,2 @@
-const argv = process.argv
-console.log(`hello ${argv[argv.length-1]}`);
+const env = process.env.name
+console.log(`hello ${env}`);
