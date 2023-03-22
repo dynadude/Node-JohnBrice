@@ -1,11 +1,8 @@
-import fs from 'fs';
-import { promisify } from 'util';
-
-const readPromisify = promisify(fs.readFile);
+import { readFileSync } from 'fs';
 
 async function main() {
 	try {
-		console.log((await readPromisify('test.txt', null)).toString());
+		console.log(readFileSync('test.txt').toString())
 	} catch (err) {
 		console.error(err);
 	}

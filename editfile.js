@@ -8,17 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const util_1 = require("util");
-const readPromisify = (0, util_1.promisify)(fs_1.default.readFile);
+const fs_1 = require("fs");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log((yield readPromisify('test.txt', null)).toString());
+            console.log((0, fs_1.readFileSync)('test.txt').toString());
         }
         catch (err) {
             console.error(err);
