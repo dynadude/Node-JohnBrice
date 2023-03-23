@@ -8,8 +8,10 @@ const HOST = 'localhost';
 const PORT = '8080';
 const app = (0, express_1.default)();
 app.post('/user/:id', (req, res) => {
-    console.log(req.params.id);
     res.send(`Welcome ${req.params.id}`);
+});
+app.get('/query/', (req, res) => {
+    res.send(`Welcome ${req.query.id}`);
 });
 app.delete('/ticket/:id', (req, res) => {
     res.send(`Welcome ${req.params.id}`);
