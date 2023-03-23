@@ -26,10 +26,25 @@ function logPostRequests(req, res, next) {
     });
     next();
 }
+function handleLogonError(err, req, res, next) {
+    if (err !== "No Token Specified") {
+        next(err);
+        return;
+    }
+    res.status(400);
+    res.send("No Token Specified");
+}
 app.use(authenticate);
 app.use(logPostRequests);
 app.post('/', (req, res) => {
     res.send(`Welcome ${req.body.name}`);
+});
+app.get('/users/', (req, res, next) => {
+    if (!req.query.id) {
+        next("No Token Specified");
+        return;
+    }
+    res.send(`Welcome ${req.query.id}`);
 });
 app.get('/query/', (req, res) => {
     res.send(`Welcome ${req.query.id}`);
@@ -47,6 +62,7 @@ app.all('/*', (req, res) => {
     res.status(404);
     res.send("Kama Od");
 });
+app.use(handleLogonError);
 app.listen(PORT, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });

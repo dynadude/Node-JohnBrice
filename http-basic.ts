@@ -1,4 +1,4 @@
-import express, { Request ,Response } from 'express';
+import express, { Request, Response, Errback } from 'express';
 
 const HOST = 'localhost';
 const PORT = '8080';
@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-function authenticate (req: Request, res: Response, next: Function) {
+function authenticate(req: Request, res: Response, next: Function) {
 	if (req.headers.authorization !== "Bearer 123") {
 		res.status(401);
 		res.send("Ya Maniak!!!");
@@ -16,7 +16,7 @@ function authenticate (req: Request, res: Response, next: Function) {
 	next();
 }
 
-function logPostRequests (req: Request, res: Response, next: Function) {
+function logPostRequests(req: Request, res: Response, next: Function) {
 	if (req.method !== "POST") {
 		next();
 		return;
@@ -29,12 +29,31 @@ function logPostRequests (req: Request, res: Response, next: Function) {
 	next();
 }
 
+function handleLogonError(err: string, req: Request, res: Response, next: Function) {
+	if (err !== "No Token Specified") {
+		next(err);
+		return;
+	}
+
+	res.status(400);
+	res.send("No Token Specified");
+}
+
 app.use(authenticate);
 
 app.use(logPostRequests);
 
 app.post('/', (req, res) => {
 	res.send(`Welcome ${req.body.name}`);
+});
+
+app.get('/users/', (req, res, next) => {
+	if (!req.query.id) {
+		next("No Token Specified");
+		return;
+	}
+
+	res.send(`Welcome ${req.query.id}`);
 });
 
 app.get('/query/', (req, res) => {
@@ -57,6 +76,8 @@ app.all('/*', (req, res) => {
 	res.status(404);
 	res.send("Kama Od");
 });
+
+app.use(handleLogonError);
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://${HOST}:${PORT}`);
