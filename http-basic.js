@@ -7,11 +7,17 @@ const express_1 = __importDefault(require("express"));
 const HOST = 'localhost';
 const PORT = '8080';
 const app = (0, express_1.default)();
-app.get('/age', (req, res) => {
-    res.send("20");
+app.post('/user', (req, res) => {
+    res.send("Sagi");
 });
-app.post('/name', (req, res) => {
-    res.send("sagi");
+app.delete('/ticket', (req, res) => {
+    res.send("Iron Man");
+});
+app.patch('/employee', (req, res) => {
+    res.send("Shai Manor");
+});
+app.put('/organization', (req, res) => {
+    res.send("John Bryce");
 });
 app.all('/*', (req, res) => {
     res.status(404);
