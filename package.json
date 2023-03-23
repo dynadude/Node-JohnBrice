@@ -1,0 +1,24 @@
+{
+  "name": "node-johnbrice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./http-basic.js",
+    "start": "node ./http-basic.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dynadude/Node-JohnBrice.git"
+  },
+  "author": "Sagi Gamliel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dynadude/Node-JohnBrice/issues"
+  },
+  "homepage": "https://github.com/dynadude/Node-JohnBrice#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

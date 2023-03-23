@@ -1,10 +1,37 @@
-import express from 'express';
+import express, { Request ,Response } from 'express';
 
 const HOST = 'localhost';
 const PORT = '8080';
 const app = express();
 
 app.use(express.json());
+
+function authenticate (req: Request, res: Response, next: Function) {
+	if (req.headers.authorization !== "Bearer 123") {
+		res.status(401);
+		res.send("Ya Maniak!!!");
+		return;
+	}
+
+	next();
+}
+
+function logPostRequests (req: Request, res: Response, next: Function) {
+	if (req.method !== "POST") {
+		next();
+		return;
+	}
+
+	res.on('finish', () => {
+		console.log(`Endpoint: ${req.url} Status: ${res.statusCode}`);
+	})
+
+	next();
+}
+
+app.use(authenticate);
+
+app.use(logPostRequests);
 
 app.post('/', (req, res) => {
 	res.send(`Welcome ${req.body.name}`);
