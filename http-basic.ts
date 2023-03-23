@@ -1,11 +1,14 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const HOST = 'localhost';
 const PORT = '8080';
 const app = express();
 
-app.post('/user/:id', (req, res) => {
-	res.send(`Welcome ${req.params.id}`);
+app.use(bodyParser());
+
+app.post('/', (req, res) => {
+	res.send(`Welcome ${req.body.name}`);
 });
 
 app.get('/query/', (req, res) => {
