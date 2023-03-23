@@ -1,11 +1,10 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 
 const HOST = 'localhost';
 const PORT = '8080';
 const app = express();
 
-app.use(bodyParser());
+app.use(express.json());
 
 app.post('/', (req, res) => {
 	res.send(`Welcome ${req.body.name}`);
