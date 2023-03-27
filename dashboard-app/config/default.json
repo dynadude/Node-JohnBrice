@@ -12,7 +12,7 @@
 			"password": "password"
 		},
 		"mongo": {
-			"port": "8081",
+			"port": "27017",
 			"db": "localhost"
 		}
 	}

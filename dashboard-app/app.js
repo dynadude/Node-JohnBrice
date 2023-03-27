@@ -8,6 +8,7 @@ const auth_1 = require("./middlewares/auth");
 const loggers_1 = require("./middlewares/loggers");
 const config_1 = __importDefault(require("config"));
 const users_1 = __importDefault(require("./routers/users"));
+const error_handlers_1 = require("./middlewares/error_handlers");
 const HOST = 'localhost';
 const PORT = '8080';
 const app = (0, express_1.default)();
@@ -43,7 +44,7 @@ app.all('/*', (req, res) => {
     res.status(404);
     res.send("Kama Od");
 });
-app.use(auth_1.handleLogonError);
+app.use(error_handlers_1.handleError);
 app.listen(PORT, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });

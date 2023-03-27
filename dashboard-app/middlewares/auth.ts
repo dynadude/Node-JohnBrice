@@ -9,14 +9,3 @@ export function authenticate(req: Request, res: Response, next: Function) {
 
 	next();
 }
-
-export function handleLogonError(err: string, req: Request, res: Response, next: Function) {
-	if (err !== "No Token Specified") {
-		next(err);
-		return;
-	}
-
-	res.status(400);
-	res.send("No Token Specified");
-}
-

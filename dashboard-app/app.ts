@@ -1,9 +1,10 @@
 import express, { Request, Response, Errback } from 'express';
-import { authenticate, handleLogonError } from './middlewares/auth';
+import { authenticate } from './middlewares/auth';
 import { logPostRequests } from './middlewares/loggers';
 import config from 'config';
 
 import userRouter from './routers/users';
+import { handleError } from './middlewares/error_handlers';
 
 const HOST = 'localhost';
 const PORT = '8080';
@@ -54,7 +55,7 @@ app.all('/*', (req, res) => {
 	res.send("Kama Od");
 });
 
-app.use(handleLogonError);
+app.use(handleError);
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://${HOST}:${PORT}`);
