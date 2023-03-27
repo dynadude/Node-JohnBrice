@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	</head>
+	<body class="container">
+
+		<header>
+		</header>
+
+		<main style="display: flex; flex-direction: column">
+			<div style="display: flex; flex-direction: row">
+				<form name = "coinForm" action="/users/symbol" method="post">
+				  <input type="text" id="name" name="name">
+				  <input type="submit" value="Add">
+				</form>
+			</div>
+			<br></br>
+
+			<div style="display: flex; flex-direction: column; width: max-content">
+			<% for(let i = 0; i < coins.length; i++) { %>
+				<div style="display: flex; flex-direction: row; padding: 1ch; width: 100%">
+					<div style="margin-right: 4ch;flex-grow: 1;">
+						<%=coins[i].name%>
+					</div>
+
+					<div style="margin-left: 4ch;text-align: end;">
+						<%=coins[i].value%>
+					</div>
+				</div>
+			<% } %>
+			</div>
+		</main>
+
+	</body>
+</html>

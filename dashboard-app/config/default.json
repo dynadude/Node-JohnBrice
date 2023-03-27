@@ -1,0 +1,19 @@
+{
+	"config": {
+		"github": {
+			"client": "client",
+			"secret": "CSI"
+		},
+		"mysql": {
+			"host": "localhost",
+			"port": "3306",
+			"db": "localhost",
+			"username": "username",
+			"password": "password"
+		},
+		"mongo": {
+			"port": "8081",
+			"db": "localhost"
+		}
+	}
+}

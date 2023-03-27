@@ -1,0 +1,12 @@
+{
+	"config": {
+		"github": {
+			"secret": "GITHUB_SECRET"
+		},
+		"mysql": {
+			"password": "MYSQL_PASSWORD"
+		}
+	}
+}
+
+
