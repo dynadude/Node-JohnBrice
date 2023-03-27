@@ -14,11 +14,12 @@ const addSymbol = (symbol) => (req, res, next) => __awaiter(void 0, void 0, void
     req.dbPool.execute(`
 		INSERT INTO users_symbols(user_id, symbol)
 		values(?, ?)
-	`, [1, "PND"], (err) => {
+	`, [1, "PND"], (err, data) => {
         if (err) {
             next(err);
             return;
         }
+        console.log(data);
         next();
     });
 });
