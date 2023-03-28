@@ -1,0 +1,21 @@
+{
+	"port": 8080,
+	"github": {
+		"clientId": "",
+		"secret": "",
+		"callbackUrl": "http://localhost:8080/auth/github/callback"
+	},
+	"config": {
+		"mysql": {
+			"host": "localhost",
+			"port": "3306",
+			"db": "localhost",
+			"username": "username",
+			"password": "password"
+		},
+		"mongo": {
+			"port": "27017",
+			"db": "localhost"
+		}
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"github": {
+		"clientId": "GITHUB_CLIENTID",
+		"secret": "GITHUB_SECRET"
+	},
+	"config": {
+		"mysql": {
+			"password": "MYSQL_PASSWORD"
+		}
+	}
+}
+
+
