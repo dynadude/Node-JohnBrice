@@ -9,11 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCoinValues = void 0;
-const getCoinValues = (coinNames) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCoinValues = exports.getCoinValue = void 0;
+const scraping_1 = require("../middlewares/scraping");
+const getCoinValue = (coin) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield (0, scraping_1.getFirstValueFromSiteByClasses)(`https://www.google.com/finance/quote/${coin}-USD`, ['YMlKec', 'fxKbKc']);
+});
+exports.getCoinValue = getCoinValue;
+const getCoinValues = (coinNames, errorValue = null) => __awaiter(void 0, void 0, void 0, function* () {
     let coins = [];
     for (let i = 0; i < coinNames.length; i++) {
-        coins.push({ name: coinNames[i], value: 9435 });
+        try {
+            coins.push({ name: coinNames[i], value: yield (0, exports.getCoinValue)(coinNames[i]) });
+        }
+        catch (err) {
+            console.log(err);
+            coins.push({ name: coinNames[i], value: null });
+        }
     }
     return coins;
 });

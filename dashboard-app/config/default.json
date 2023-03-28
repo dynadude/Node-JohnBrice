@@ -1,9 +1,11 @@
 {
+	"port": 8080,
+	"github": {
+		"clientId": "",
+		"secret": "",
+		"callbackUrl": "http://localhost:8080/auth/github/callback"
+	},
 	"config": {
-		"github": {
-			"client": "client",
-			"secret": "CSI"
-		},
 		"mysql": {
 			"host": "localhost",
 			"port": "3306",

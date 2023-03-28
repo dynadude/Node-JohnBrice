@@ -1,6 +1,6 @@
-import express, { Request, Response, Errback } from 'express';
+import express from 'express';
 import { Router } from "express";
-import { getCoinValues } from "../controllers/coins";
+import { getCoinValue, getCoinValues } from "../controllers/coins";
 import Joi from "../middlewares/joi";
 import { coinValidator } from "./users.validate";
 import { connectToMongoDb, connectToMySqlDb } from '../middlewares/db';
@@ -17,7 +17,7 @@ router.get('/welcome', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
 	res.render('users/dashboard', {
-		coins: await getCoinValues(['NIS', 'USD', 'YEN'])
+		coins: await getCoinValues(['ILS', 'USD', 'ETH'])
 	});
 });
 
@@ -33,7 +33,7 @@ router.get('/query', connectToMySqlDb(), (req, res) => {
 router.get('/getValue/:coin', async (req, res, next) => {
 
 	try {
-		let value = await getFirstValueFromSiteByClasses(`https://www.google.com/finance/quote/${req.params.coin}-USD`, ['YMlKec', 'fxKbKc']);
+		let value = getCoinValue(req.params.coin);
 		res.send(value);
 	}
 	catch (err) {

@@ -1,5 +1,5 @@
 import express, { Request, Response, Errback } from 'express';
-import { authenticate } from './middlewares/auth';
+import authenticate from './routers/auth';
 import { logPostRequests } from './middlewares/loggers';
 import config from 'config';
 
@@ -7,7 +7,7 @@ import userRouter from './routers/users';
 import { handleError } from './middlewares/error_handlers';
 
 const HOST = 'localhost';
-const PORT = '8080';
+const PORT = config.get('port');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use('/users', userRouter);
 
-app.use(authenticate);
+app.use('/auth', authenticate);
 
 app.use(logPostRequests);
 
